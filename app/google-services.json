@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "561011486547",
+    "firebase_url": "https://meztliejemplo-default-rtdb.firebaseio.com",
+    "project_id": "meztliejemplo",
+    "storage_bucket": "meztliejemplo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561011486547:android:f255e0f78776dd2920bba6",
+        "android_client_info": {
+          "package_name": "com.example.biomeztli"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtx8tWhs0RQnYWFyPirFvcFRSzJBMamRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561011486547:android:284671b9fa6bacdf20bba6",
+        "android_client_info": {
+          "package_name": "com.example.biomeztliapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtx8tWhs0RQnYWFyPirFvcFRSzJBMamRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561011486547:android:9c3f9d192c52570a20bba6",
+        "android_client_info": {
+          "package_name": "com.example.meztliapp1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtx8tWhs0RQnYWFyPirFvcFRSzJBMamRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

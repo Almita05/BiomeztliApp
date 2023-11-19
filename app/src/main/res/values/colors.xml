@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="fondo">#92AAD4</color>
+    <color name="botones">#333F54</color>
+    <color name="letraBoton">#24563C</color>
+    <color name="fondoPantalla">#96CC97</color>
+    <color name="input">#245747</color>
+    <color name="menu">#BEE6AE</color>
+    <color name="rosa">#D49592</color>
+    <color name="target1">#519AA6</color>
+    <color name="target2">#E6C0A3</color>
 </resources>
