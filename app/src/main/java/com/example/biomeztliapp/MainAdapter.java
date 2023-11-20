@@ -38,8 +38,16 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Manejar el evento onClick aquí
-                Intent intent = new Intent(v.getContext(), MainActivity2.class);
+                // Obtener el URL de la imagen y el nombre
+                String imageUrl = model.getImagen();
+                String nombre = model.getNombre();
+
+                // Crear un Intent y agregar la información extra
+                Intent intent = new Intent(v.getContext(), MainActivity3.class);
+                intent.putExtra("IMAGE_URL", imageUrl);
+                intent.putExtra("NOMBRE", nombre);
+
+                // Iniciar la actividad
                 v.getContext().startActivity(intent);
             }
         });
@@ -63,3 +71,4 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
         }
     }
 }
+

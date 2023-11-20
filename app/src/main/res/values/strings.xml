@@ -4,4 +4,9 @@
     <string name="title_home">Inicio</string>
     <string name="title_dashboard">Enfermedades</string>
     <string name="title_notifications">Relájate</string>
+    <string name="title_info">Información</string>
+    <string name="title_properties">Propiedades</string>
+    <string name="title_use">Usos</string>
+    <string name="title_caution">Precauciones y contraindicaciones</string>
+    <string name="title_activity_main3">MainActivity3</string>
 </resources>

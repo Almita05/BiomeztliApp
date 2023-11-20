@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_info"
+        android:icon="@drawable/descripcion"
+        android:title="@string/title_info" />
+
+    <item
+        android:id="@+id/navigation_properties"
+        android:icon="@drawable/propiedades"
+        android:title="@string/title_properties" />
+
+    <item
+        android:id="@+id/navigation_use"
+        android:icon="@drawable/uso"
+        android:title="@string/title_use" />
+    <item
+        android:id="@+id/navigation_caution"
+        android:icon="@drawable/precaucion"
+        android:title="@string/title_caution" />
+
+</menu>
