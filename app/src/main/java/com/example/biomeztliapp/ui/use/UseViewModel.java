@@ -10,7 +10,7 @@ public class UseViewModel extends ViewModel {
 
     public UseViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Precaucion");
+        mText.setValue("uso");
     }
 
     public LiveData<String> getText() {
