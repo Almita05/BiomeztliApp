@@ -28,9 +28,6 @@ public class MainActivity2 extends AppCompatActivity {
         // Configurar el AppBarConfiguration si es necesario
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
 
-        // Comenta o elimina la siguiente línea si no estás utilizando un ActionBar
-        // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
         // Configura el BottomNavigationView con NavController
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavigationUI.setupWithNavController(navView, navController);
