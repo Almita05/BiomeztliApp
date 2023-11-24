@@ -25,7 +25,13 @@ public class InfoFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Recuperar datos del Intent
+        String descripcion = getActivity().getIntent().getStringExtra("DESCRIPCION");
+        // Usar los datos en tu TextView
+        String displayText = "Descripción: " + descripcion;
+        textView.setText(displayText);
+
         return root;
     }
 

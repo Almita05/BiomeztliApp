@@ -25,7 +25,12 @@ public class CautionFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Recuperar datos del Intent
+        String precaucion = getActivity().getIntent().getStringExtra("PRECAUCION");
+        // Usar los datos en tu TextView
+        String displayText = "Precuacion y contraindicaciones: " + precaucion;
+        textView.setText(displayText);
         return root;
     }
 

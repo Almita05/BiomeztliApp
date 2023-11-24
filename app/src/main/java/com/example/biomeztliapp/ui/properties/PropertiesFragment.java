@@ -25,7 +25,12 @@ public class PropertiesFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Recuperar datos del Intent
+        String propiedades = getActivity().getIntent().getStringExtra("PROPIEDADES");
+        // Usar los datos en tu TextView
+        String displayText = "Propiedades: " + propiedades;
+        textView.setText(displayText);
         return root;
     }
 

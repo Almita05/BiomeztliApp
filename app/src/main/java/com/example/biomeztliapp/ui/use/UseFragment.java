@@ -25,7 +25,12 @@ public class UseFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // Recuperar datos del Intent
+        String uso = getActivity().getIntent().getStringExtra("USO");
+        // Usar los datos en tu TextView
+        String displayText = "Uso: " + uso;
+        textView.setText(displayText);
         return root;
     }
 

@@ -40,11 +40,20 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                 // Obtener el URL de la imagen y el nombre
                 String imageUrl = model.getImagen();
                 String nombre = model.getNombre();
+                String descripcion = model.getDescripcion();
+                String propiedades = model.getPropiedades();
+                String uso = model.getUso();
+                String precaucion = model.getPrecaucion();
 
                 // Crear un Intent y agregar la información extra
                 Intent intent = new Intent(v.getContext(), MainActivity3.class);
                 intent.putExtra("IMAGE_URL", imageUrl);
                 intent.putExtra("NOMBRE", nombre);
+                intent.putExtra("DESCRIPCION", descripcion);
+                intent.putExtra("PROPIEDADES", propiedades);
+                intent.putExtra("USO", uso);
+                intent.putExtra("PRECAUCION", precaucion);
+
 
                 // Iniciar la actividad
                 v.getContext().startActivity(intent);
