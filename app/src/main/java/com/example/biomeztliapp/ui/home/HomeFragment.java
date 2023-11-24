@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.biomeztliapp.MainAdapter;
@@ -27,9 +27,11 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         recyclerView = view.findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Configuración del GridLayoutManager con 2 columnas
+        int spanCount = 2;
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
+        recyclerView.setLayoutManager(layoutManager);
 
         FirebaseRecyclerOptions<MainModel> options =
                 new FirebaseRecyclerOptions.Builder<MainModel>()
@@ -41,13 +43,11 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
     @Override
     public void onStart() {
         super.onStart();
         mainAdapter.startListening();
     }
-
     @Override
     public void onStop() {
         super.onStop();

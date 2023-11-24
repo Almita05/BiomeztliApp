@@ -1,5 +1,6 @@
 package com.example.biomeztliapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +48,13 @@ public class MainActivity3 extends AppCompatActivity {
 
         // Asigno el nombre al TextView
         textView.setText(nombre);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity2.class);
+        startActivity(intent);
+        finish();
     }
 
     // Override onSupportNavigateUp to provide proper Up navigation

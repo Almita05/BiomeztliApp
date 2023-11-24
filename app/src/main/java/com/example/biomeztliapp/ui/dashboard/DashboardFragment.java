@@ -4,13 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.biomeztliapp.MainAdapter;
 import com.example.biomeztliapp.MainModel;
 import com.example.biomeztliapp.R;
@@ -29,8 +26,13 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+
         recyclerView = view.findViewById(R.id.rvEnfermedades);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // Configuración del GridLayoutManager con 2 columnas
+        int spanCount = 2;
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
+        recyclerView.setLayoutManager(layoutManager);
 
         // Obtén una referencia a la base de datos
         databaseReference = FirebaseDatabase.getInstance().getReference().child("enfermedades");
