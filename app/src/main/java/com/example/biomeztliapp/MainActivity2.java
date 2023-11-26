@@ -2,6 +2,7 @@ package com.example.biomeztliapp;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -13,6 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 
 public class MainActivity2 extends AppCompatActivity {
+
+
     private AppBarConfiguration appBarConfiguration;
 
 

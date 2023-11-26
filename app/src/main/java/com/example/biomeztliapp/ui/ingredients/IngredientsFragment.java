@@ -30,11 +30,15 @@ public class IngredientsFragment extends Fragment {
 
         final TextView textView = binding.textNotifications;
 
-        // Recuperar datos del Intent
-        String ingredientes = getActivity().getIntent().getStringExtra("INGREDIENTES");
-        // Usar los datos en tu TextView
-        String displayText = ingredientes;
-        textView.setText(displayText);
+        // Recuperar datos del argumento
+        Bundle args = getArguments();
+        if (args != null) {
+            String ingredientes = args.getString("INGREDIENTES", "");
+            // Usar los datos en tu TextView
+            String displayText = ingredientes;
+            textView.setText(displayText);
+        }
+
         textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28); // Tamaño del texto en sp
         textView.setTextColor(Color.BLACK); // Color del texto en azul
