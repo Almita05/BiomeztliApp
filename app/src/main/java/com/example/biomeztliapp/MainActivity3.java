@@ -30,6 +30,7 @@ public class MainActivity3 extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main3);
+        navView.setItemIconTintList(null);
 
         // Set up the BottomNavigationView with NavController
         NavigationUI.setupWithNavController(navView, navController);

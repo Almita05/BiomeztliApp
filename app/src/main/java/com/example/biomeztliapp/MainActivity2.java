@@ -1,5 +1,7 @@
 package com.example.biomeztliapp;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -31,6 +33,8 @@ public class MainActivity2 extends AppCompatActivity {
         // Configura el BottomNavigationView con NavController
         BottomNavigationView navView = findViewById(R.id.nav_view);
         NavigationUI.setupWithNavController(navView, navController);
+        navView.setItemIconTintList(null);
+        navView.setBackgroundColor(getResources().getColor(R.color.input));
     }
 
 
