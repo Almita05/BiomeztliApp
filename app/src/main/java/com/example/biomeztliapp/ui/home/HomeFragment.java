@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("plantas"), MainModel.class)
                         .build();
 
-        mainAdapter = new MainAdapter(options);
+        mainAdapter = new MainAdapter(options, this);
         recyclerView.setAdapter(mainAdapter);
 
         return view;

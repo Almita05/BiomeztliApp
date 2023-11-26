@@ -9,20 +9,24 @@ public class MainModel {
     private String uso;
     private String imagen;
 
+    private String ingredientes;
+
+    private String modoPreparacion;
+
     // Constructor por defecto requerido para Firebase
     public MainModel() {
     }
 
-    public MainModel(String descripcion, String nombre, String precaucion, String propiedades, String uso, String imagen) {
+    public MainModel(String descripcion, String nombre, String precaucion, String propiedades, String uso, String imagen, String ingredientes, String modoPreparacion) {
         this.descripcion = descripcion;
         this.nombre = nombre;
         this.precaucion = precaucion;
         this.propiedades = propiedades;
         this.uso = uso;
         this.imagen = imagen;
+        this.ingredientes = ingredientes;
+        this.modoPreparacion = modoPreparacion;
     }
-
-    // Métodos getter y setter para cada propiedad
 
     public String getDescripcion() {
         return descripcion;
@@ -70,5 +74,21 @@ public class MainModel {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public String getModoPreparacion() {
+        return modoPreparacion;
+    }
+
+    public void setModoPreparacion(String modoPreparacion) {
+        this.modoPreparacion = modoPreparacion;
     }
 }

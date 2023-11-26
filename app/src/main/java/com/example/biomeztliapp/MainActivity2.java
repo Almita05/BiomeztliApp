@@ -13,6 +13,7 @@ import com.google.firebase.FirebaseApp;
 public class MainActivity2 extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

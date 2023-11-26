@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.biomeztliapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,11 +16,14 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity4"
+            android:exported="false"
+            android:label="@string/title_activity_main4" />
+        <activity
             android:name=".MainActivity3"
             android:exported="false"
             android:label="@string/title_activity_main3"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
-        <!-- Actividad principal con filtro de lanzamiento -->
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" /> <!-- Actividad principal con filtro de lanzamiento -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -32,7 +37,6 @@
             android:name=".MainActivity2"
             android:exported="false"
             android:label="@string/title_activity_main2" />
-
     </application>
 
 </manifest>
