@@ -19,12 +19,10 @@ import com.example.biomeztliapp.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 public class DashboardFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private MainAdapter adapter;
-
     private DatabaseReference databaseReference;
 
     @Override
@@ -32,23 +30,16 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         recyclerView = view.findViewById(R.id.rvEnfermedades);
-        // Configuración del GridLayoutManager con 2 columnas
-        int spanCount = 2;
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), spanCount);
-        recyclerView.setLayoutManager(layoutManager);
 
         // Inicializa databaseReference con la referencia correcta de tu base de datos
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("enfermedades"); // Reemplaza "tu_nodo_de_datos" con el nombre de tu nodo
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("enfermedades");
 
         FirebaseRecyclerOptions<MainModel> options =
                 new FirebaseRecyclerOptions.Builder<MainModel>()
                         .setQuery(databaseReference, MainModel.class)
                         .build();
 
-        adapter = new MainAdapter(options, this); // Pasa una referencia al fragmento
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        adapter = new MainAdapter(options, this);
 
         // Configurar el clic en el adaptador (puedes hacerlo aquí o en tu adaptador)
         adapter.setOnItemClickListener(new MainAdapter.OnItemClickListener() {
@@ -70,6 +61,10 @@ public class DashboardFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        // Asigna el adaptador al RecyclerView después de configurarlo
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        recyclerView.setAdapter(adapter);
 
         return view;
     }
