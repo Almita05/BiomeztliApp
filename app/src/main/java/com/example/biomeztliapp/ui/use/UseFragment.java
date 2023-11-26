@@ -15,20 +15,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biomeztliapp.R;
 import com.example.biomeztliapp.databinding.FragmentNotificationsBinding;
+import com.example.biomeztliapp.databinding.FragmentUseBinding;
 
 public class UseFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentUseBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         UseViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(UseViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentUseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
+        final TextView textView = binding.use;
 
         // Recuperar datos del Intent
         String uso = getActivity().getIntent().getStringExtra("USO");

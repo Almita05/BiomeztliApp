@@ -14,21 +14,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biomeztliapp.R;
+import com.example.biomeztliapp.databinding.FragmentCautionBinding;
 import com.example.biomeztliapp.databinding.FragmentNotificationsBinding;
 
 public class CautionFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentCautionBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         CautionViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(CautionViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentCautionBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
+        final TextView textView = binding.caution;
 
         // Recuperar datos del Intent
         String precaucion = getActivity().getIntent().getStringExtra("PRECAUCION");

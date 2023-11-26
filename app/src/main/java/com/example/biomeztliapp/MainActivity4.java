@@ -33,6 +33,8 @@ public class MainActivity4 extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main4);
         // Set up the BottomNavigationView with NavController
         NavigationUI.setupWithNavController(navView, navController);
+        navView.setItemIconTintList(null);
+        navView.setBackgroundColor(getResources().getColor(R.color.input));
 
         ImageView imageView = findViewById(R.id.img1);
         TextView textView = findViewById(R.id.nombrePlanta);

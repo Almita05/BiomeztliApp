@@ -22,6 +22,7 @@
         android:id="@+id/nav_view"
         android:layout_width="427dp"
         android:layout_height="70dp"
+        app:itemTextColor="@color/white"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="7dp"
         android:background="?android:attr/windowBackground"
@@ -62,7 +63,7 @@
     <fragment
         android:id="@+id/nav_host_fragment_activity_main3"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="427dp"
+        android:layout_width="match_parent"
         android:layout_height="413dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -29,6 +29,7 @@ public class NotificationsFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
+        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         VideoView videoView = root.findViewById(R.id.videoView);
         // Configurar el archivo de video

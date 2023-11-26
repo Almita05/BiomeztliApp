@@ -15,20 +15,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biomeztliapp.R;
 import com.example.biomeztliapp.databinding.FragmentNotificationsBinding;
+import com.example.biomeztliapp.databinding.FragmentPropertiesBinding;
 
 public class PropertiesFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentPropertiesBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         PropertiesViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(PropertiesViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentPropertiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
+        final TextView textView = binding.properties;
 
         // Recuperar datos del Intent
         String propiedades = getActivity().getIntent().getStringExtra("PROPIEDADES");

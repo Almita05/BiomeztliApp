@@ -14,31 +14,32 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biomeztliapp.R;
+import com.example.biomeztliapp.databinding.FragmentIngredientsBinding;
 import com.example.biomeztliapp.databinding.FragmentNotificationsBinding;
 
 public class IngredientsFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentIngredientsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        IngredientsModel notificationsViewModel =
+        IngredientsModel ingredientsViewModel =
                 new ViewModelProvider(this).get(IngredientsModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentIngredientsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
+        final TextView textView = binding.ingredients;
 
-        // Recuperar datos del argumento
-        Bundle args = getArguments();
-        if (args != null) {
-            String ingredientes = args.getString("INGREDIENTES", "");
-            // Usar los datos en tu TextView
-            String displayText = ingredientes;
-            textView.setText(displayText);
-        }
-
+        // Recuperar datos del Intent
+        String ingredientes = getActivity().getIntent().getStringExtra("INGREDIENTES");
+        // Usar los datos en tu TextView
+        String displayText = ingredientes;
+        textView.setText(displayText);
+        textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28); // Tamaño del texto en sp
+        textView.setTextColor(Color.BLACK); // Color del texto en azul
+        root.setBackgroundColor(getResources().getColor(R.color.verdeBonito)); //Color de fondo
         textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28); // Tamaño del texto en sp
         textView.setTextColor(Color.BLACK); // Color del texto en azul

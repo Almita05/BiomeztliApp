@@ -15,20 +15,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biomeztliapp.R;
 import com.example.biomeztliapp.databinding.FragmentNotificationsBinding;
+import com.example.biomeztliapp.databinding.FragmentPreparationBinding;
 
 public class modePreparationFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentPreparationBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         modePreparationModel notificationsViewModel =
                 new ViewModelProvider(this).get(modePreparationModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentPreparationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
+        final TextView textView = binding.mode;
 
         // Recuperar datos del Intent
         String modoPreparacion = getActivity().getIntent().getStringExtra("PREPARACION");
