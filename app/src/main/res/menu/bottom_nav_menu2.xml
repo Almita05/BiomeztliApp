@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_info"
         android:icon="@drawable/descripcion"
+        app:itemIconTint="@color/rosa"
+        app:itemTextColor="@color/rosa"
         android:title="@string/title_info" />
 
     <item
         android:id="@+id/navigation_properties"
         android:icon="@drawable/propiedades"
+        app:itemIconTint="@color/verde"
+        app:itemTextColor="@color/verde"
         android:title="@string/title_properties" />
 
     <item
         android:id="@+id/navigation_use"
         android:icon="@drawable/uso"
+        app:itemIconTint="@color/azul"
+        app:itemTextColor="@color/azul"
         android:title="@string/title_use" />
     <item
         android:id="@+id/navigation_caution"
         android:icon="@drawable/precaucion"
+        app:itemIconTint="@color/rojo"
+        app:itemTextColor="@color/rojo"
         android:title="@string/title_caution" />
 
 </menu>

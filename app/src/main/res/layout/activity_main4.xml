@@ -5,7 +5,16 @@
     android:id="@+id/container"
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
-
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="133dp"
+        android:layout_height="95dp"
+        android:layout_gravity="end|top"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view3"
@@ -24,20 +33,21 @@
 
     <ImageView
         android:id="@+id/img1"
-        android:layout_width="302dp"
-        android:layout_height="263dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="28dp"
+        android:layout_width="292dp"
+        android:layout_height="233dp"
+        android:layout_marginTop="88dp"
         android:src="@mipmap/ic_launcher"
+        app:civ_border_color="@color/borde"
+        app:civ_border_width="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nombrePlanta"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
+        android:layout_width="412dp"
+        android:layout_height="89dp"
         android:layout_marginTop="24dp"
         android:fontFamily="casual"
         android:text="TextView"
@@ -45,13 +55,13 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/img1"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="-1dp" />
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main4"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="410dp"
-        android:layout_height="310dp"
+        android:layout_width="427dp"
+        android:layout_height="413dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

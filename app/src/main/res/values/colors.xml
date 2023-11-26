@@ -8,12 +8,21 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="fondo">#92AAD4</color>
-    <color name="botones">#333F54</color>
+    <color name="botones">#0c5149</color>
     <color name="letraBoton">#24563C</color>
     <color name="fondoPantalla">#96CC97</color>
     <color name="input">#245747</color>
     <color name="menu">#BEE6AE</color>
+    <color name="fondoDemas">#9ecfbc</color>
     <color name="rosa">#D49592</color>
     <color name="target1">#519AA6</color>
     <color name="target2">#E6C0A3</color>
+    <color name="fondoPrincipal">#9ed1b7</color>
+    <color name="info">#f6d86b</color>
+    <color name="borde">#9fd86b</color>
+    <color name="verde">#ef9ca4</color>
+    <color name="azul">#69d2cd</color>
+    <color name="rojo">#f7803c</color>
+    <color name="morado">#C39BD3</color>
+    <color name="verdeBonito">#53ba83</color>
 </resources>

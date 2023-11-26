@@ -1,6 +1,9 @@
 package com.example.biomeztliapp.ui.use;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.biomeztliapp.R;
 import com.example.biomeztliapp.databinding.FragmentNotificationsBinding;
 
 public class UseFragment extends Fragment {
@@ -29,8 +33,12 @@ public class UseFragment extends Fragment {
         // Recuperar datos del Intent
         String uso = getActivity().getIntent().getStringExtra("USO");
         // Usar los datos en tu TextView
-        String displayText = "Uso: " + uso;
+        String displayText = uso;
         textView.setText(displayText);
+        textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 36); // Tamaño del texto en sp
+        textView.setTextColor(Color.BLACK); // Color del texto en azul
+        root.setBackgroundColor(getResources().getColor(R.color.azul)); //Color de fondo
         return root;
     }
 
