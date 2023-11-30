@@ -70,7 +70,6 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                 String precaucion = model.getPrecaucion();
                 String ingredientes = model.getIngredientes();
                 String modoPreparacion = model.getModoPreparacion();
-
                 Intent intent;
 
                 // Verificar en qué fragmento estamos y decidir a qué actividad dirigirse
