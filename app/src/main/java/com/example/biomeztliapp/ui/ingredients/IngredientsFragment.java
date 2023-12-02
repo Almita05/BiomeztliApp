@@ -36,14 +36,10 @@ public class IngredientsFragment extends Fragment {
         // Usar los datos en tu TextView
         String displayText = ingredientes;
         textView.setText(displayText);
-        textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28); // Tamaño del texto en sp
-        textView.setTextColor(Color.BLACK); // Color del texto en azul
-        root.setBackgroundColor(getResources().getColor(R.color.verdeBonito)); //Color de fondo
-        textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28); // Tamaño del texto en sp
-        textView.setTextColor(Color.BLACK); // Color del texto en azul
-        root.setBackgroundColor(getResources().getColor(R.color.verdeBonito)); //Color de fondo
+        textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28); // Tamaño del texto
+        textView.setTextColor(Color.BLACK); // Color del texto en negro
+        root.setBackgroundColor(getResources().getColor(R.color.fondoDemas)); //Color de fondo
 
         return root;
     }

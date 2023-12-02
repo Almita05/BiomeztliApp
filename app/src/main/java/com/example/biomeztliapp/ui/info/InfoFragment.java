@@ -36,7 +36,7 @@ public class InfoFragment extends Fragment {
         textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 36); // Tamaño del texto en sp
         textView.setTextColor(Color.BLACK); // Color del texto en azul
-        root.setBackgroundColor(getResources().getColor(R.color.info)); //Color de fondo
+        root.setBackgroundColor(getResources().getColor(R.color.fondoDemas)); //Color de fondo
         return root;
     }
 
