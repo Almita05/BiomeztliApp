@@ -41,7 +41,7 @@ public class DashboardFragment extends Fragment {
 
         adapter = new MainAdapter(options, this);
 
-        // Configurar el clic en el adaptador (puedes hacerlo aquí o en tu adaptador)
+        // Configurar el clic en el adaptador
         adapter.setOnItemClickListener(new MainAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(String imageUrl, String nombre, String descripcion, String propiedades, String uso, String precaucion) {
@@ -53,10 +53,6 @@ public class DashboardFragment extends Fragment {
                 intent.putExtra("PROPIEDADES", propiedades);
                 intent.putExtra("USO", uso);
                 intent.putExtra("PRECAUCION", precaucion);
-
-                // También puedes agregar información adicional para Activity4 aquí
-                // intent.putExtra("OTRO_DATO", otroDato);
-
                 // Iniciar la actividad
                 startActivity(intent);
             }

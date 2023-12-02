@@ -34,7 +34,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
         void onItemClickForActivity4(String ingredientes, String modoPreparacion);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+   public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
 
@@ -103,7 +103,6 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                     // Agrega la información adicional necesaria para Activity4
                     String ingredientes = model.getIngredientes();
                     String modoPreparacion = model.getModoPreparacion();
-
                     mActivity4Listener.onItemClickForActivity4(ingredientes, modoPreparacion);
                 }
                 return true;

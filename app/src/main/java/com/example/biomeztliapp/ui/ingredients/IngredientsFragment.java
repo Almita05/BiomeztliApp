@@ -43,7 +43,7 @@ public class IngredientsFragment extends Fragment {
         textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28); // Tamaño del texto en sp
         textView.setTextColor(Color.BLACK); // Color del texto en azul
-        root.setBackgroundColor(getResources().getColor(R.color.morado)); //Color de fondo
+        root.setBackgroundColor(getResources().getColor(R.color.verdeBonito)); //Color de fondo
 
         return root;
     }
