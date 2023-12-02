@@ -13,11 +13,14 @@ public class MainModel {
 
     private String modoPreparacion;
 
+
+    private Boolean favorito;
+
     // Constructor por defecto requerido para Firebase
     public MainModel() {
     }
 
-    public MainModel(String descripcion, String nombre, String precaucion, String propiedades, String uso, String imagen, String ingredientes, String modoPreparacion) {
+    public MainModel(String descripcion, String nombre, String precaucion, String propiedades, String uso, String imagen, String ingredientes, String modoPreparacion, Boolean favorito) {
         this.descripcion = descripcion;
         this.nombre = nombre;
         this.precaucion = precaucion;
@@ -26,6 +29,7 @@ public class MainModel {
         this.imagen = imagen;
         this.ingredientes = ingredientes;
         this.modoPreparacion = modoPreparacion;
+        this.favorito = favorito;
     }
 
     public String getDescripcion() {
@@ -90,5 +94,13 @@ public class MainModel {
 
     public void setModoPreparacion(String modoPreparacion) {
         this.modoPreparacion = modoPreparacion;
+    }
+
+    public Boolean getFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(Boolean favorito) {
+        this.favorito = favorito;
     }
 }
