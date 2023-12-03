@@ -39,6 +39,7 @@
         <activity
             android:name=".MainActivity2"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_main2" />
     </application>
 

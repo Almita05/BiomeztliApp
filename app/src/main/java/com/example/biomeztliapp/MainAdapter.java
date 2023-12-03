@@ -1,7 +1,9 @@
 package com.example.biomeztliapp;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,24 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.biomeztliapp.ui.dashboard.DashboardFragment;
 import com.example.biomeztliapp.ui.home.HomeFragment;
 import com.example.biomeztliapp.ui.notifications.NotificationsFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
 
-import java.util.Objects;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,11 +32,51 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
     private OnItemClickListener mListener;
     private OnItemClickListenerForActivity4 mActivity4Listener;
     private Fragment mFragment; // Agregamos una referencia al fragmento
+    private List<ClipData.Item> itemList;
+
+    private List<MainModel> originalList;  // Almacena la lista original sin filtrar
+    private List<MainModel> filteredList;  // Almacena la lista filtrada
+
+
+    public List<MainModel> getOriginalList() {
+        return originalList;
+    }
+
+    public List<MainModel> getFilteredList() {
+        return filteredList;
+    }
+
+    public void filter(String text) {
+        Log.d("MainAdapter", "Filtering with text: " + text);
+
+        // Agrega la siguiente línea para verificar el tamaño de originalList
+        Log.d("MainAdapter", "Original List Size: " + originalList.size());
+
+        filteredList.clear();
+
+        if (text.isEmpty()) {
+            filteredList.addAll(originalList);
+        } else {
+            for (MainModel item : originalList) {
+                if (item.getNombre().toLowerCase().contains(text.toLowerCase())) {
+                    filteredList.add(item);
+                }
+            }
+        }
+
+        Log.d("MainAdapter", "Filtered List Size: " + filteredList.size());
+
+        notifyDataSetChanged();
+    }
+
 
     public MainAdapter(@NonNull FirebaseRecyclerOptions<MainModel> options, Fragment fragment) {
         super(options);
         mFragment = fragment;
+        originalList = new ArrayList<>();
+        filteredList = new ArrayList<>();
     }
+
 
     public interface OnItemClickListener {
         void onItemClick(String imageUrl, String nombre, String descripcion, String propiedades, String uso, String precaucion);
