@@ -1,6 +1,5 @@
 package com.example.biomeztliapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -8,15 +7,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.example.biomeztliapp.ui.dashboard.DashboardFragment;
 import com.example.biomeztliapp.ui.home.HomeFragment;
+import com.example.biomeztliapp.ui.notifications.NotificationsFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
+
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -26,8 +39,10 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
     private OnItemClickListenerForActivity4 mActivity4Listener;
     private Fragment mFragment; // Agregamos una referencia al fragmento
 
-
-
+    public MainAdapter(@NonNull FirebaseRecyclerOptions<MainModel> options, Fragment fragment) {
+        super(options);
+        mFragment = fragment;
+    }
 
     public interface OnItemClickListener {
         void onItemClick(String imageUrl, String nombre, String descripcion, String propiedades, String uso, String precaucion);
@@ -45,10 +60,6 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
         mActivity4Listener = listener;
     }
 
-    public MainAdapter(@NonNull FirebaseRecyclerOptions<MainModel> options, Fragment fragment) {
-        super(options);
-        mFragment = fragment;
-    }
     @Override
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull MainModel model) {
         holder.nombre.setText(model.getNombre());
@@ -61,64 +72,57 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                 .error(com.google.firebase.database.R.drawable.common_google_signin_btn_icon_dark_normal)
                 .into(holder.img);
 
-        // Verifica si imgfav está presente en el diseño antes de intentar establecer el OnClickListener
-        if (holder.imgfv != null) {
-            // Actualizar el estado del corazón (favorito)
-            updateHeartIcon(holder.imgfv, model.getFavorito());
+        // Actualizar el estado del corazón (favorito)
+        updateHeartIcon(holder.imgfv, model.getFavorito());
 
-            // Manejar clic en el corazón (favorito)
-            holder.imgfv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Cambiar el estado de favorito en el modelo de datos
-                    boolean newFavoritoState = !model.getFavorito();
-                    model.setFavorito(newFavoritoState);
+        // Manejar clic en el corazón (favorito)
+        holder.imgfv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Cambiar el estado de favorito en el modelo de datos
+                boolean newFavoritoState = !model.getFavorito();
+                model.setFavorito(newFavoritoState);
 
-                    // Actualizar la vista del icono del corazón
-                    updateHeartIcon(holder.imgfv, newFavoritoState);
+                // Actualizar la vista del icono del corazón
+                updateHeartIcon(holder.imgfv, newFavoritoState);
 
-                    // Además, puedes guardar el cambio en la base de datos Firebase si es necesario
-                    getRef(position).child("favorito").setValue(newFavoritoState);
-                }
-            });
-        }
+                // Mostrar el mensaje correspondiente
+                String mensaje = newFavoritoState ? "Agregado a favoritos" : "Eliminado de favoritos";
+                Toast.makeText(v.getContext(), mensaje, Toast.LENGTH_SHORT).show();
+
+                // Cambiar el estado de favorito en la base de datos Firebase
+                getRef(position).child("favorito").setValue(newFavoritoState);
+            }
+        });
 
         // Onclick en la imagen para ir a la actividad 3
         holder.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String imageUrl = model.getImagen();
-                String nombre = model.getNombre();
-                String descripcion = model.getDescripcion();
-                String propiedades = model.getPropiedades();
-                String uso = model.getUso();
-                String precaucion = model.getPrecaucion();
-                String ingredientes = model.getIngredientes();
-                String modoPreparacion = model.getModoPreparacion();
                 Intent intent;
 
                 // Verificar en qué fragmento estamos y decidir a qué actividad dirigirse
-                if (mFragment instanceof HomeFragment) {
+                if (mFragment instanceof HomeFragment || mFragment instanceof NotificationsFragment) {
                     intent = new Intent(v.getContext(), MainActivity3.class);
                 } else if (mFragment instanceof DashboardFragment) {
                     intent = new Intent(v.getContext(), MainActivity4.class);
                 } else {
-                    //intent = new Intent(v.getContext(), MainActivity5.class);
-                    return;
+                    return; // No especificaste qué hacer en este caso
                 }
 
-                intent.putExtra("IMAGE_URL", imageUrl);
-                intent.putExtra("NOMBRE", nombre);
-                intent.putExtra("DESCRIPCION", descripcion);
-                intent.putExtra("PROPIEDADES", propiedades);
-                intent.putExtra("USO", uso);
-                intent.putExtra("PRECAUCION", precaucion);
-                intent.putExtra("INGREDIENTES", ingredientes);
-                intent.putExtra("PREPARACION", modoPreparacion);
+                // Añadir extras al intent
+                intent.putExtra("IMAGE_URL", model.getImagen());
+                intent.putExtra("NOMBRE", model.getNombre());
+                intent.putExtra("DESCRIPCION", model.getDescripcion());
+                intent.putExtra("PROPIEDADES", model.getPropiedades());
+                intent.putExtra("USO", model.getUso());
+                intent.putExtra("PRECAUCION", model.getPrecaucion());
+                intent.putExtra("INGREDIENTES", model.getIngredientes());
+                intent.putExtra("PREPARACION", model.getModoPreparacion());
+
                 v.getContext().startActivity(intent);
             }
         });
-
 
         // Clic largo en la imagen para manejar Activity4
         holder.img.setOnLongClickListener(new View.OnLongClickListener() {
@@ -126,9 +130,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
             public boolean onLongClick(View v) {
                 if (mActivity4Listener != null) {
                     // Agrega la información adicional necesaria para Activity4
-                    String ingredientes = model.getIngredientes();
-                    String modoPreparacion = model.getModoPreparacion();
-                    mActivity4Listener.onItemClickForActivity4(ingredientes, modoPreparacion);
+                    mActivity4Listener.onItemClickForActivity4(model.getIngredientes(), model.getModoPreparacion());
                 }
                 return true;
             }
@@ -151,16 +153,13 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
             super(itemView);
             img = itemView.findViewById(R.id.img1);
             nombre = itemView.findViewById(R.id.nameText);
-            imgfv = itemView.findViewById(R.id.imgfav);;
+            imgfv = itemView.findViewById(R.id.imgfav);
         }
     }
 
     // Método para actualizar la vista del icono del corazón según el estado de favorito
     private void updateHeartIcon(ImageView imgfav, boolean isFavorito) {
-        if (isFavorito) {
-            imgfav.setImageResource(R.drawable.favorito);
-        } else {
-            imgfav.setImageResource(R.drawable.favorito_no);
-        }
+        int iconResource = isFavorito ? R.drawable.favorito : R.drawable.favorito_no;
+        imgfav.setImageResource(iconResource);
     }
 }
