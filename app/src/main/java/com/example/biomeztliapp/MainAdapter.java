@@ -16,6 +16,8 @@ import com.example.biomeztliapp.ui.dashboard.DashboardFragment;
 import com.example.biomeztliapp.ui.home.HomeFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.MyViewHolder> {
@@ -23,6 +25,9 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
     private OnItemClickListener mListener;
     private OnItemClickListenerForActivity4 mActivity4Listener;
     private Fragment mFragment; // Agregamos una referencia al fragmento
+
+
+
 
     public interface OnItemClickListener {
         void onItemClick(String imageUrl, String nombre, String descripcion, String propiedades, String uso, String precaucion);
@@ -44,7 +49,6 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
         super(options);
         mFragment = fragment;
     }
-
     @Override
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull MainModel model) {
         holder.nombre.setText(model.getNombre());
@@ -58,12 +62,12 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                 .into(holder.img);
 
         // Verifica si imgfav está presente en el diseño antes de intentar establecer el OnClickListener
-        if (holder.imgfav != null) {
+        if (holder.imgfv != null) {
             // Actualizar el estado del corazón (favorito)
-            updateHeartIcon(holder.imgfav, model.getFavorito());
+            updateHeartIcon(holder.imgfv, model.getFavorito());
 
             // Manejar clic en el corazón (favorito)
-            holder.imgfav.setOnClickListener(new View.OnClickListener() {
+            holder.imgfv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Cambiar el estado de favorito en el modelo de datos
@@ -71,7 +75,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                     model.setFavorito(newFavoritoState);
 
                     // Actualizar la vista del icono del corazón
-                    updateHeartIcon(holder.imgfav, newFavoritoState);
+                    updateHeartIcon(holder.imgfv, newFavoritoState);
 
                     // Además, puedes guardar el cambio en la base de datos Firebase si es necesario
                     getRef(position).child("favorito").setValue(newFavoritoState);
@@ -79,7 +83,56 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
             });
         }
 
-        // Resto del código...
+        // Onclick en la imagen para ir a la actividad 3
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String imageUrl = model.getImagen();
+                String nombre = model.getNombre();
+                String descripcion = model.getDescripcion();
+                String propiedades = model.getPropiedades();
+                String uso = model.getUso();
+                String precaucion = model.getPrecaucion();
+                String ingredientes = model.getIngredientes();
+                String modoPreparacion = model.getModoPreparacion();
+                Intent intent;
+
+                // Verificar en qué fragmento estamos y decidir a qué actividad dirigirse
+                if (mFragment instanceof HomeFragment) {
+                    intent = new Intent(v.getContext(), MainActivity3.class);
+                } else if (mFragment instanceof DashboardFragment) {
+                    intent = new Intent(v.getContext(), MainActivity4.class);
+                } else {
+                    //intent = new Intent(v.getContext(), MainActivity5.class);
+                    return;
+                }
+
+                intent.putExtra("IMAGE_URL", imageUrl);
+                intent.putExtra("NOMBRE", nombre);
+                intent.putExtra("DESCRIPCION", descripcion);
+                intent.putExtra("PROPIEDADES", propiedades);
+                intent.putExtra("USO", uso);
+                intent.putExtra("PRECAUCION", precaucion);
+                intent.putExtra("INGREDIENTES", ingredientes);
+                intent.putExtra("PREPARACION", modoPreparacion);
+                v.getContext().startActivity(intent);
+            }
+        });
+
+
+        // Clic largo en la imagen para manejar Activity4
+        holder.img.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mActivity4Listener != null) {
+                    // Agrega la información adicional necesaria para Activity4
+                    String ingredientes = model.getIngredientes();
+                    String modoPreparacion = model.getModoPreparacion();
+                    mActivity4Listener.onItemClickForActivity4(ingredientes, modoPreparacion);
+                }
+                return true;
+            }
+        });
     }
 
     @NonNull
@@ -91,14 +144,14 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         CircleImageView img;
-        ImageView imgfav; // Nuevo ImageView para el corazón (favorito) en activity_main3.xml
         TextView nombre;
+        ImageView imgfv;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.img1);
-            imgfav = itemView.findViewById(R.id.imgfav); // Puede ser nulo si no está presente en el diseño actual
             nombre = itemView.findViewById(R.id.nameText);
+            imgfv = itemView.findViewById(R.id.imgfav);;
         }
     }
 

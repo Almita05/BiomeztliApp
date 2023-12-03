@@ -12,8 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.biomeztliapp.MainModel;
 import com.example.biomeztliapp.R;
 import com.example.biomeztliapp.databinding.FragmentNotificationsBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationsFragment extends Fragment {
 
@@ -28,15 +32,6 @@ public class NotificationsFragment extends Fragment {
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
-
-        VideoView videoView = root.findViewById(R.id.videoView);
-        // Configurar el archivo de video
-        Uri videoUri = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.video);
-        videoView.setVideoURI(videoUri);
-
-        // Iniciar la reproducción del video
-        videoView.start();
         return root;
     }
 
