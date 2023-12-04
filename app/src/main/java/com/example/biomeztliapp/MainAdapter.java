@@ -32,49 +32,12 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
     private OnItemClickListener mListener;
     private OnItemClickListenerForActivity4 mActivity4Listener;
     private Fragment mFragment; // Agregamos una referencia al fragmento
-    private List<ClipData.Item> itemList;
 
-    private List<MainModel> originalList;  // Almacena la lista original sin filtrar
-    private List<MainModel> filteredList;  // Almacena la lista filtrada
-
-
-    public List<MainModel> getOriginalList() {
-        return originalList;
-    }
-
-    public List<MainModel> getFilteredList() {
-        return filteredList;
-    }
-
-    public void filter(String text) {
-        Log.d("MainAdapter", "Filtering with text: " + text);
-
-        // Agrega la siguiente línea para verificar el tamaño de originalList
-        Log.d("MainAdapter", "Original List Size: " + originalList.size());
-
-        filteredList.clear();
-
-        if (text.isEmpty()) {
-            filteredList.addAll(originalList);
-        } else {
-            for (MainModel item : originalList) {
-                if (item.getNombre().toLowerCase().contains(text.toLowerCase())) {
-                    filteredList.add(item);
-                }
-            }
-        }
-
-        Log.d("MainAdapter", "Filtered List Size: " + filteredList.size());
-
-        notifyDataSetChanged();
-    }
 
 
     public MainAdapter(@NonNull FirebaseRecyclerOptions<MainModel> options, Fragment fragment) {
         super(options);
         mFragment = fragment;
-        originalList = new ArrayList<>();
-        filteredList = new ArrayList<>();
     }
 
 
@@ -110,65 +73,75 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
         updateHeartIcon(holder.imgfv, model.getFavorito());
 
         // Manejar clic en el corazón (favorito)
-        holder.imgfv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Cambiar el estado de favorito en el modelo de datos
-                boolean newFavoritoState = !model.getFavorito();
-                model.setFavorito(newFavoritoState);
+        // Manejar clic en el corazón (favorito)
+        if (shouldShowFavoritesIcon()) {
+            holder.imgfv.setVisibility(View.VISIBLE);
+            holder.imgfv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Cambiar el estado de favorito en el modelo de datos
+                    boolean newFavoritoState = !model.getFavorito();
+                    model.setFavorito(newFavoritoState);
 
-                // Actualizar la vista del icono del corazón
-                updateHeartIcon(holder.imgfv, newFavoritoState);
+                    // Actualizar la vista del icono del corazón
+                    updateHeartIcon(holder.imgfv, newFavoritoState);
 
-                // Mostrar el mensaje correspondiente
-                String mensaje = newFavoritoState ? "Agregado a favoritos" : "Eliminado de favoritos";
-                Toast.makeText(v.getContext(), mensaje, Toast.LENGTH_SHORT).show();
+                    // Mostrar el mensaje correspondiente
+                    String mensaje = newFavoritoState ? "Agregado a favoritos" : "Eliminado de favoritos";
+                    Toast.makeText(v.getContext(), mensaje, Toast.LENGTH_SHORT).show();
 
-                // Cambiar el estado de favorito en la base de datos Firebase
-                getRef(position).child("favorito").setValue(newFavoritoState);
-            }
-        });
-
-        // Onclick en la imagen para ir a la actividad 3
-        holder.img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent;
-
-                // Verificar en qué fragmento estamos y decidir a qué actividad dirigirse
-                if (mFragment instanceof HomeFragment || mFragment instanceof NotificationsFragment) {
-                    intent = new Intent(v.getContext(), MainActivity3.class);
-                } else if (mFragment instanceof DashboardFragment) {
-                    intent = new Intent(v.getContext(), MainActivity4.class);
-                } else {
-                    return; // No especificaste qué hacer en este caso
+                    // Cambiar el estado de favorito en la base de datos Firebase
+                    getRef(position).child("favorito").setValue(newFavoritoState);
                 }
 
-                // Añadir extras al intent
-                intent.putExtra("IMAGE_URL", model.getImagen());
-                intent.putExtra("NOMBRE", model.getNombre());
-                intent.putExtra("DESCRIPCION", model.getDescripcion());
-                intent.putExtra("PROPIEDADES", model.getPropiedades());
-                intent.putExtra("USO", model.getUso());
-                intent.putExtra("PRECAUCION", model.getPrecaucion());
-                intent.putExtra("INGREDIENTES", model.getIngredientes());
-                intent.putExtra("PREPARACION", model.getModoPreparacion());
+            });
 
-                v.getContext().startActivity(intent);
-            }
-        });
+            // Onclick en la imagen para ir a la actividad 3
+            holder.img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent;
 
-        // Clic largo en la imagen para manejar Activity4
-        holder.img.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (mActivity4Listener != null) {
-                    // Agrega la información adicional necesaria para Activity4
-                    mActivity4Listener.onItemClickForActivity4(model.getIngredientes(), model.getModoPreparacion());
+                    // Verificar en qué fragmento estamos y decidir a qué actividad dirigirse
+                    if (mFragment instanceof HomeFragment || mFragment instanceof NotificationsFragment) {
+                        intent = new Intent(v.getContext(), MainActivity3.class);
+                    } else if (mFragment instanceof DashboardFragment) {
+                        intent = new Intent(v.getContext(), MainActivity4.class);
+                    } else {
+                        return; // No especificaste qué hacer en este caso
+                    }
+
+                    // Añadir extras al intent
+                    intent.putExtra("IMAGE_URL", model.getImagen());
+                    intent.putExtra("NOMBRE", model.getNombre());
+                    intent.putExtra("DESCRIPCION", model.getDescripcion());
+                    intent.putExtra("PROPIEDADES", model.getPropiedades());
+                    intent.putExtra("USO", model.getUso());
+                    intent.putExtra("PRECAUCION", model.getPrecaucion());
+                    intent.putExtra("INGREDIENTES", model.getIngredientes());
+                    intent.putExtra("PREPARACION", model.getModoPreparacion());
+
+                    v.getContext().startActivity(intent);
                 }
-                return true;
-            }
-        });
+            });
+
+            // Clic largo en la imagen para manejar Activity4
+            holder.img.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (mActivity4Listener != null) {
+                        // Agrega la información adicional necesaria para Activity4
+                        mActivity4Listener.onItemClickForActivity4(model.getIngredientes(), model.getModoPreparacion());
+                    }
+                    return true;
+                }
+            });
+        }
+        else
+
+        {
+            holder.imgfv.setVisibility(View.GONE);
+        }
     }
 
     @NonNull
@@ -196,4 +169,10 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
         int iconResource = isFavorito ? R.drawable.favorito : R.drawable.favorito_no;
         imgfav.setImageResource(iconResource);
     }
+
+    //Método para poder ocultar el icono de favoritos
+    private boolean shouldShowFavoritesIcon() {
+        return !(mFragment instanceof DashboardFragment);
+    }
+
 }
