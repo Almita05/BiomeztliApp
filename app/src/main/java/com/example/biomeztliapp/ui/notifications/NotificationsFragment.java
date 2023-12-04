@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,18 +34,19 @@ import java.util.List;
 
 public class NotificationsFragment extends Fragment {
 
-    private VideoView videoView;
     private FragmentNotificationsBinding binding;
     private List<MainModel> favoritosList = new ArrayList<>();
     private RecyclerView recyclerView;
 
-    private MainAdapter combinedAdapter;
+    private MainAdapter combinedAdapter, mainAdapter;
+    private SearchView searchView;
+    private FirebaseRecyclerOptions<MainModel> options; // Declarar options como campo de clase
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
         recyclerView = view.findViewById(R.id.rvFavoritos);
-
+        searchView = view.findViewById(R.id.searchView3);
 
         // Configuración del GridLayoutManager con 2 columnas
         int spanCount = 2;
@@ -53,30 +55,73 @@ public class NotificationsFragment extends Fragment {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("plantas");
 
+
         Query combinedQuery = databaseReference
                 .orderByChild("favorito")
                 .equalTo(true);
+
+        // Configurar el SearchView
+        search_view();
 
         FirebaseRecyclerOptions<MainModel> combinedOptions = new FirebaseRecyclerOptions.Builder<MainModel>()
                 .setQuery(combinedQuery, MainModel.class)
                 .build();
 
         combinedAdapter = new MainAdapter(combinedOptions, this);
-        recyclerView.setAdapter(combinedAdapter);
+        mainAdapter = new MainAdapter(combinedOptions, this); // Cambia options por combinedOptions
+        recyclerView.setAdapter(mainAdapter);
 
-    // Iniciar escucha de datos para el adaptador combinado
-        combinedAdapter.startListening();
 
         return view;
     }
 
+    private void txtSearch(String s) {
+        // Configurar las opciones de FirebaseRecyclerAdapter con una consulta filtrada por destino
+        FirebaseRecyclerOptions<MainModel> options =
+                new FirebaseRecyclerOptions.Builder<MainModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("plantas").orderByChild("nombre").startAt(s).endAt(s + "\uf8ff"), MainModel.class)
+                        .build();
+        mainAdapter.updateOptions(options);
+        mainAdapter.notifyDataSetChanged();
+    }
 
+
+
+    // Configurar el SearchView
+    private void search_view() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                txtSearch(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                txtSearch(s);
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mainAdapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mainAdapter.stopListening();
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        combinedAdapter.stopListening();
     }
+
 
     public void addFavorito(MainModel model) {
         favoritosList.add(model);
@@ -87,5 +132,6 @@ public class NotificationsFragment extends Fragment {
         favoritosList.remove(model);
         combinedAdapter.notifyDataSetChanged();
     }
+
 
 }

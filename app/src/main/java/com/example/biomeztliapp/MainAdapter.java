@@ -33,11 +33,14 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
     private OnItemClickListenerForActivity4 mActivity4Listener;
     private Fragment mFragment; // Agregamos una referencia al fragmento
 
+    private FirebaseRecyclerOptions<MainModel> options; // Inicializar aquí
+
 
 
     public MainAdapter(@NonNull FirebaseRecyclerOptions<MainModel> options, Fragment fragment) {
         super(options);
         mFragment = fragment;
+        this.options = options; // Inicializar options
     }
 
 
@@ -93,8 +96,11 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                     // Cambiar el estado de favorito en la base de datos Firebase
                     getRef(position).child("favorito").setValue(newFavoritoState);
                 }
-
             });
+        } else {
+            holder.imgfv.setVisibility(View.GONE);
+        }
+
 
             // Onclick en la imagen para ir a la actividad 3
             holder.img.setOnClickListener(new View.OnClickListener() {
@@ -137,12 +143,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                 }
             });
         }
-        else
 
-        {
-            holder.imgfv.setVisibility(View.GONE);
-        }
-    }
 
     @NonNull
     @Override

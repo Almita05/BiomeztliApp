@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,18 +23,21 @@ import com.google.firebase.database.FirebaseDatabase;
 public class DashboardFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private MainAdapter adapter;
+    private MainAdapter adapter, mainAdapter;
     private DatabaseReference databaseReference;
+    private SearchView searchView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         recyclerView = view.findViewById(R.id.rvEnfermedades);
+        searchView = view.findViewById(R.id.searchView2);
 
         // Inicializa databaseReference con la referencia correcta de tu base de datos
         databaseReference = FirebaseDatabase.getInstance().getReference().child("enfermedades");
-
+        // Configurar el SearchView
+        search_view();
         FirebaseRecyclerOptions<MainModel> options =
                 new FirebaseRecyclerOptions.Builder<MainModel>()
                         .setQuery(databaseReference, MainModel.class)
@@ -60,22 +64,53 @@ public class DashboardFragment extends Fragment {
 
         // Asigna el adaptador al RecyclerView después de configurarlo
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        recyclerView.setAdapter(adapter);
+        mainAdapter = new MainAdapter(options, this);
+        recyclerView.setAdapter(mainAdapter);
 
         return view;
     }
 
+    private void txtSearch(String s) {
+        // Configurar las opciones de FirebaseRecyclerAdapter con una consulta filtrada por destino
+        FirebaseRecyclerOptions<MainModel> options =
+                new FirebaseRecyclerOptions.Builder<MainModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("enfermedades").orderByChild("nombre").startAt(s).endAt(s + "\uf8ff"), MainModel.class)
+                        .build();
+
+        mainAdapter.updateOptions(options);
+        mainAdapter.notifyDataSetChanged();
+    }
+
+
+
+    // Configurar el SearchView
+    private void search_view() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                txtSearch(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                txtSearch(s);
+                return false;
+            }
+        });
+    }
+
+
     @Override
     public void onStart() {
         super.onStart();
-        // Conecta el adaptador a la base de datos y empieza a escuchar cambios
-        adapter.startListening();
+        mainAdapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        // Detén la escucha de cambios cuando el fragmento se detenga
-        adapter.stopListening();
+        mainAdapter.stopListening();
     }
 }
+
