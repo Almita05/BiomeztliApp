@@ -114,8 +114,12 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
                     } else if (mFragment instanceof DashboardFragment) {
                         intent = new Intent(v.getContext(), MainActivity4.class);
                     } else {
-                        return; // No especificaste qué hacer en este caso
+                        return;
                     }
+
+                    // Iniciar actividad con animación de escala
+                    mFragment.startActivity(intent);
+                    mFragment.getActivity().overridePendingTransition(R.anim.scale_in, R.anim.scale_out);
 
                     // Añadir extras al intent
                     intent.putExtra("IMAGE_URL", model.getImagen());

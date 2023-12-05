@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">BiomeztliApp</string>
     <string name="title_activity_main2">MainActivity2</string>
-    <string name="title_home">Inicio</string>
+    <string name="title_home">Plantas</string>
     <string name="title_dashboard">Enfermedades</string>
-    <string name="title_notifications">Relájate</string>
+    <string name="title_notifications">Favoritos</string>
     <string name="title_info">Descripción</string>
     <string name="title_properties">Propiedades</string>
     <string name="title_use">Usos</string>

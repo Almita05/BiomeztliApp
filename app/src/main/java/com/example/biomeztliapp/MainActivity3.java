@@ -58,6 +58,7 @@ public class MainActivity3 extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity2.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
     }
 
