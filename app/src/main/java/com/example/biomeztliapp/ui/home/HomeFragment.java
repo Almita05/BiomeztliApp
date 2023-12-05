@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment {
     private FirebaseRecyclerOptions<MainModel> options; // Declarar options como campo de clase
 
     public HomeFragment() {
-        // Constructor vacío requerido por Fragment
+
     }
 
     @Override

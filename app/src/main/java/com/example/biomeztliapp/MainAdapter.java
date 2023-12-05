@@ -75,7 +75,7 @@ public class MainAdapter extends FirebaseRecyclerAdapter<MainModel, MainAdapter.
         // Actualizar el estado del corazón (favorito)
         updateHeartIcon(holder.imgfv, model.getFavorito());
 
-        // Manejar clic en el corazón (favorito)
+
         // Manejar clic en el corazón (favorito)
         if (shouldShowFavoritesIcon()) {
             holder.imgfv.setVisibility(View.VISIBLE);

@@ -33,7 +33,7 @@ public class PropertiesFragment extends Fragment {
 
         // Recuperar datos del Intent
         String propiedades = getActivity().getIntent().getStringExtra("PROPIEDADES");
-        // Usar los datos en tu TextView
+        // Usar los datos en el TextView
         String displayText = propiedades;
         textView.setText(displayText);
         textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita

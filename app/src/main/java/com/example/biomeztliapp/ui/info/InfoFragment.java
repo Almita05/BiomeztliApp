@@ -30,7 +30,7 @@ public class InfoFragment extends Fragment {
         final TextView textView = binding.textView2;
         // Recuperar datos del Intent
         String descripcion = getActivity().getIntent().getStringExtra("DESCRIPCION");
-        // Usar los datos en tu TextView
+        // Usar los datos en el TextView
         String displayText = descripcion;
         textView.setText(displayText);
         textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita

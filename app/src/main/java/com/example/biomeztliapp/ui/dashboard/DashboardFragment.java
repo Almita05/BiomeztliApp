@@ -34,7 +34,7 @@ public class DashboardFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rvEnfermedades);
         searchView = view.findViewById(R.id.searchView2);
 
-        // Inicializa databaseReference con la referencia correcta de tu base de datos
+        // Inicializa databaseReference con la referencia correcta de la base de datos
         databaseReference = FirebaseDatabase.getInstance().getReference().child("enfermedades");
         // Configurar el SearchView
         search_view();

@@ -33,7 +33,7 @@ public class IngredientsFragment extends Fragment {
 
         // Recuperar datos del Intent
         String ingredientes = getActivity().getIntent().getStringExtra("INGREDIENTES");
-        // Usar los datos en tu TextView
+        // Usar los datos en el TextView
         String displayText = ingredientes;
         textView.setText(displayText);
         textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto

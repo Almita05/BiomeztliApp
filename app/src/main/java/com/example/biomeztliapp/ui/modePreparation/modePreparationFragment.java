@@ -33,7 +33,7 @@ public class modePreparationFragment extends Fragment {
 
         // Recuperar datos del Intent
         String modoPreparacion = getActivity().getIntent().getStringExtra("PREPARACION");
-        // Usar los datos en tu TextView
+        // Usar los datos en el TextView
         String displayText = modoPreparacion;
         textView.setText(displayText);
         textView.setTypeface(null, Typeface.NORMAL); // Tipo de texto en negrita

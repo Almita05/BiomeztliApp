@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 //Pasamos a la actividad 2
                 Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                 startActivity(intent);
+                //Agregamos la animación
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
